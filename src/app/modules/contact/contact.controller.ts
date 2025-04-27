@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { ContactService } from "./contact.service";
+import { Contact } from "./contact.model";
 
 const createContact = catchAsync(async (req, res) => {
   if (req.file) {
@@ -43,8 +44,21 @@ const updateContact = catchAsync(async (req, res) => {
   });
 });
 
+const deleteContact = catchAsync(async (req, res) => {
+  const { contactId } = req.params;
+
+  const result = await ContactService.deleteContactFromDB(contactId);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    message: "Contact is deleted successfully!",
+    data: result,
+  });
+});
+
 export const ContactController = {
   createContact,
   getAllContacts,
   updateContact,
+  deleteContact,
 };

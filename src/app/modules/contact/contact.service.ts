@@ -1,3 +1,5 @@
+import { StatusCodes } from "http-status-codes";
+import AppError from "../../errors/appError";
 import { TContact } from "./contact.interface";
 import { Contact } from "./contact.model";
 
@@ -21,8 +23,20 @@ const updateContactIntoDB = async (
   return result;
 };
 
+const deleteContactFromDB = (contactId: string) => {
+  const result = Contact.findByIdAndDelete(contactId);
+  console.log(result);
+
+  if (!result) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Contact not found!");
+  }
+
+  return null;
+};
+
 export const ContactService = {
   createContactIntoDB,
   getAllContactsFromDB,
   updateContactIntoDB,
+  deleteContactFromDB,
 };

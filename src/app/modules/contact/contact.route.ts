@@ -30,4 +30,6 @@ router.patch(
   ContactController.updateContact
 );
 
+router.delete("/:contactId", ContactController.deleteContact);
+
 export const ContactRoutes = router;
