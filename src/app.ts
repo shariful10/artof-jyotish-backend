@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import router from "./app/routes";
 import globalErrorHandler from "./app/middleware/globalErrorHandler";
 import notFound from "./app/middleware/notFound";
+import path from "path";
 const app: Application = express();
 
 // Middleware setup
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1", router);
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 const test = async (req: Request, res: Response) => {
   res.send(

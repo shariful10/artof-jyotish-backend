@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A e-commerce web application server.",
   "main": "server.js",
-  "repository": "https://github.com/Programming-Hero-Next-Level-Development/NextMart-Server.git",
+  "repository": "https://github.com/shariful10/artof-jyotish-backend.git",
   "author": "Md Shariful Islam",
   "license": "MIT",
   "scripts": {

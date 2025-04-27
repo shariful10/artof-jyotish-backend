@@ -28,19 +28,8 @@ const registerUser = async (payload: TUser) => {
 };
 
 const getAllUser = async (query: Record<string, unknown>) => {
-  const UserQuery = new QueryBuilder(User.find(), query)
-    .search(UserSearchableFields)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
-
-  const result = await UserQuery.modelQuery;
-  const meta = await UserQuery.countTotal();
-  return {
-    result,
-    meta,
-  };
+  const result = await User.find();
+  return result;
 };
 
 export const UserServices = {

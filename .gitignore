@@ -17,10 +17,6 @@ pids
 # Node modules
 node_modules/
 
-# Build directories
-dist/
-build/
-
 # Dependency directories
 jspm_packages/
 bower_components/
