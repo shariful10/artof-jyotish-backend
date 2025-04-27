@@ -6,6 +6,23 @@ const createContactIntoDB = async (payload: TContact) => {
   return result;
 };
 
+const getAllContactsFromDB = () => {
+  const result = Contact.find();
+  return result;
+};
+
+const updateContactIntoDB = async (
+  contactId: string,
+  updatedData: Partial<TContact>
+) => {
+  const result = await Contact.findByIdAndUpdate(contactId, updatedData, {
+    new: true,
+  });
+  return result;
+};
+
 export const ContactService = {
   createContactIntoDB,
+  getAllContactsFromDB,
+  updateContactIntoDB,
 };

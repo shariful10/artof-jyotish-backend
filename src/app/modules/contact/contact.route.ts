@@ -17,4 +17,17 @@ router.post(
   ContactController.createContact
 );
 
-export const ContactRoutes = router; // Corrected export name
+router.get("/", ContactController.getAllContacts);
+
+router.patch(
+  "/:contactId",
+  upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = JSON.parse(req.body.data);
+    next();
+  },
+  validateRequest(ContactValidations.updateContactValidationSchema),
+  ContactController.updateContact
+);
+
+export const ContactRoutes = router;

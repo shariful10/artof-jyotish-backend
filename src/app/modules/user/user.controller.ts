@@ -18,7 +18,7 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
   });
 
   sendResponse(res, {
-    statusCode: StatusCodes.OK,
+    statusCode: StatusCodes.CREATED,
     message: "User registration completed successfully!",
     data: {
       accessToken,

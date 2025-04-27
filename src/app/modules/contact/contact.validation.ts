@@ -16,6 +16,25 @@ const createContactValidationSchema = z.object({
   }),
 });
 
+const updateContactValidationSchema = z.object({
+  body: z.object({
+    title: z
+      .string({
+        invalid_type_error: "Title must be a string",
+      })
+      .optional(),
+    description: z
+      .string({
+        invalid_type_error: "Description must be a string",
+      })
+      .optional(),
+    photo: z
+      .string({ invalid_type_error: "Photo must be a string" })
+      .optional(),
+  }),
+});
+
 export const ContactValidations = {
   createContactValidationSchema,
+  updateContactValidationSchema,
 };
