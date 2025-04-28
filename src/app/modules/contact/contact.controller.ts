@@ -2,7 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { ContactService } from "./contact.service";
-import { Contact } from "./contact.model";
 
 const createContact = catchAsync(async (req, res) => {
   if (req.file) {

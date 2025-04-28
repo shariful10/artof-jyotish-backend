@@ -23,14 +23,14 @@ const updateContactIntoDB = async (
   return result;
 };
 
-const deleteContactFromDB = (contactId: string) => {
-  const result = Contact.findByIdAndDelete(contactId);
-  console.log(result);
+const deleteContactFromDB = async (contactId: string) => {
+  const contact = await Contact.isContactExists(contactId);
 
-  if (!result) {
-    throw new AppError(StatusCodes.NOT_FOUND, "Contact not found!");
+  if (!contact) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Contact does not exist!");
   }
 
+  await Contact.findByIdAndDelete(contactId);
   return null;
 };
 

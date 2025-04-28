@@ -75,7 +75,7 @@ userSchema.statics.isUserExist = async function (userId: string) {
   const existingUser = await this.findById(userId);
 
   if (!existingUser) {
-    throw new AppError(StatusCodes.NOT_ACCEPTABLE, "User does not exist!");
+    throw new AppError(StatusCodes.NOT_FOUND, "User does not exist!");
   }
 
   return existingUser;
