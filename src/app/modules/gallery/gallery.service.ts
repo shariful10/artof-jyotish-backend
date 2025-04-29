@@ -2,15 +2,23 @@ import { StatusCodes } from "http-status-codes";
 import AppError from "../../errors/appError";
 import { TGallery } from "./gallery.interface";
 import { Gallery } from "./gallery.model";
+import QueryBuilder from "../../builder/QueryBuilder";
 
 const createGalleryIntoDB = async (payload: TGallery) => {
   const result = await Gallery.create(payload);
   return result;
 };
 
-const getAllGalleryFromDB = async () => {
-  const result = await Gallery.find();
-  return result;
+const getAllGalleryFromDB = async (query: Record<string, unknown>) => {
+  const galleryQuery = new QueryBuilder(Gallery.find(), query).paginate();
+
+  const meta = await galleryQuery.countTotal();
+  const result = await galleryQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
 };
 
 const updateGalleryIntoDB = async (

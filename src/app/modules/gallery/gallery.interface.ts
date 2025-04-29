@@ -2,7 +2,7 @@ import { Model } from "mongoose";
 
 export type TGallery = {
   galleryTitle: string;
-  date: Date;
+  date: string;
   description: string;
   photo?: string[];
 };

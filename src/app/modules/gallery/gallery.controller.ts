@@ -22,12 +22,13 @@ const createGallery = catchAsync(async (req, res) => {
 });
 
 const getAllGallery = catchAsync(async (req, res) => {
-  const result = await GalleryService.getAllGalleryFromDB();
+  const result = await GalleryService.getAllGalleryFromDB(req.query);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: "Gallery retrieved successfully!",
-    data: result,
+    meta: result.meta,
+    data: result.result,
   });
 });
 

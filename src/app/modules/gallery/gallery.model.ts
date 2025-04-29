@@ -9,7 +9,7 @@ const gallerySchema = new Schema<TGallery, GalleryModel>({
     required: true,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
   },
   description: {
@@ -18,7 +18,7 @@ const gallerySchema = new Schema<TGallery, GalleryModel>({
   },
   photo: {
     type: [String],
-    default: [],
+    optional: true,
   },
 });
 
