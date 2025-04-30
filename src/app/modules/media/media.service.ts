@@ -2,15 +2,23 @@ import { StatusCodes } from "http-status-codes";
 import AppError from "../../errors/appError";
 import { TMedia } from "./media.interface";
 import { Media } from "./media.model";
+import QueryBuilder from "../../builder/QueryBuilder";
 
 const createMediaIntoDB = async (payload: TMedia) => {
   const result = await Media.create(payload);
   return result;
 };
 
-const getAllMediaFromDB = async () => {
-  const result = await Media.find();
-  return result;
+const getAllMediaFromDB = async (query: Record<string, unknown>) => {
+  const mediaQuery = new QueryBuilder(Media.find(), query).paginate();
+
+  const meta = await mediaQuery.countTotal();
+  const result = await mediaQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
 };
 
 const updateMediaIntoDB = async (mediaId: string, payload: Partial<TMedia>) => {

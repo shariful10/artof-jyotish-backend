@@ -14,12 +14,13 @@ const createMedia = catchAsync(async (req, res) => {
 });
 
 const getAllMedia = catchAsync(async (req, res) => {
-  const result = await MediaService.getAllMediaFromDB();
+  const result = await MediaService.getAllMediaFromDB(req.query);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: "Contacts are retrieved successfully!",
-    data: result,
+    data: result.result,
+    meta: result.meta,
   });
 });
 

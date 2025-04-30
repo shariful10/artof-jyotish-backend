@@ -26,11 +26,12 @@ const createMedia = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, vo
     });
 }));
 const getAllMedia = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield media_service_1.MediaService.getAllMediaFromDB();
+    const result = yield media_service_1.MediaService.getAllMediaFromDB(req.query);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_codes_1.StatusCodes.OK,
         message: "Contacts are retrieved successfully!",
-        data: result,
+        data: result.result,
+        meta: result.meta,
     });
 }));
 const updateMedia = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {

@@ -16,14 +16,20 @@ exports.ContactService = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const appError_1 = __importDefault(require("../../errors/appError"));
 const contact_model_1 = require("./contact.model");
+const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
 const createContactIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield contact_model_1.Contact.create(payload);
     return result;
 });
-const getAllContactsFromDB = () => {
-    const result = contact_model_1.Contact.find();
-    return result;
-};
+const getAllContactsFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const contactQuery = new QueryBuilder_1.default(contact_model_1.Contact.find(), query).paginate();
+    const meta = yield contactQuery.countTotal();
+    const result = yield contactQuery.modelQuery;
+    return {
+        meta,
+        result,
+    };
+});
 const updateContactIntoDB = (contactId, updatedData) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const contact = yield contact_model_1.Contact.isContactExists(contactId);

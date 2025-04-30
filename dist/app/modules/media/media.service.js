@@ -16,13 +16,19 @@ exports.MediaService = void 0;
 const http_status_codes_1 = require("http-status-codes");
 const appError_1 = __importDefault(require("../../errors/appError"));
 const media_model_1 = require("./media.model");
+const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
 const createMediaIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield media_model_1.Media.create(payload);
     return result;
 });
-const getAllMediaFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield media_model_1.Media.find();
-    return result;
+const getAllMediaFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const mediaQuery = new QueryBuilder_1.default(media_model_1.Media.find(), query).paginate();
+    const meta = yield mediaQuery.countTotal();
+    const result = yield mediaQuery.modelQuery;
+    return {
+        meta,
+        result,
+    };
 });
 const updateMediaIntoDB = (mediaId, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const media = yield media_model_1.Media.isMediaExists(mediaId);

@@ -18,12 +18,13 @@ const createContact = catchAsync(async (req, res) => {
 });
 
 const getAllContacts = catchAsync(async (req, res) => {
-  const result = await ContactService.getAllContactsFromDB();
+  const result = await ContactService.getAllContactsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: "Contacts are retrieved successfully!",
-    data: result,
+    data: result.result,
+    meta: result.meta,
   });
 });
 

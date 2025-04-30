@@ -2,15 +2,23 @@ import { StatusCodes } from "http-status-codes";
 import AppError from "../../errors/appError";
 import { TContact } from "./contact.interface";
 import { Contact } from "./contact.model";
+import QueryBuilder from "../../builder/QueryBuilder";
 
 const createContactIntoDB = async (payload: TContact) => {
   const result = await Contact.create(payload);
   return result;
 };
 
-const getAllContactsFromDB = () => {
-  const result = Contact.find();
-  return result;
+const getAllContactsFromDB = async (query: Record<string, unknown>) => {
+  const contactQuery = new QueryBuilder(Contact.find(), query).paginate();
+
+  const meta = await contactQuery.countTotal();
+  const result = await contactQuery.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
 };
 
 const updateContactIntoDB = async (

@@ -29,11 +29,12 @@ const createContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const getAllContacts = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield contact_service_1.ContactService.getAllContactsFromDB();
+    const result = yield contact_service_1.ContactService.getAllContactsFromDB(req.query);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_codes_1.StatusCodes.OK,
         message: "Contacts are retrieved successfully!",
-        data: result,
+        data: result.result,
+        meta: result.meta,
     });
 }));
 const updateContact = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
