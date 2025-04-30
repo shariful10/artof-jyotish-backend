@@ -77,7 +77,7 @@ userSchema.statics.isUserExist = function (userId) {
     return __awaiter(this, void 0, void 0, function* () {
         const existingUser = yield this.findById(userId);
         if (!existingUser) {
-            throw new appError_1.default(http_status_codes_1.StatusCodes.NOT_ACCEPTABLE, "User does not exist!");
+            throw new appError_1.default(http_status_codes_1.StatusCodes.NOT_FOUND, "User does not exist!");
         }
         return existingUser;
     });

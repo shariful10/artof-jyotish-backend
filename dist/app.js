@@ -18,13 +18,14 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const routes_1 = __importDefault(require("./app/routes"));
 const globalErrorHandler_1 = __importDefault(require("./app/middleware/globalErrorHandler"));
 const notFound_1 = __importDefault(require("./app/middleware/notFound"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 // Middleware setup
-app.use((0, cors_1.default)({ origin: "http://localhost:3000" }));
+app.use((0, cors_1.default)({ origin: "http://localhost:3000", credentials: true }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api/v1", routes_1.default);
+app.use("/uploads", express_1.default.static(path_1.default.join(process.cwd(), "uploads")));
 const test = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send(`<div style="background: black; border-radius: 15px; width: 700px; height: 200px; margin: auto; margin-top: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><h1 style="color: white; text-align: center;">Welcome to the server of Art Jyotish!</h1></div>`);
 });

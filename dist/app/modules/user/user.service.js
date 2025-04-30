@@ -15,8 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserServices = void 0;
 const user_interface_1 = require("./user.interface");
 const user_model_1 = __importDefault(require("./user.model"));
-const QueryBuilder_1 = __importDefault(require("../../builder/QueryBuilder"));
-const user_constant_1 = require("./user.constant");
 const auth_utils_1 = require("../auth/auth.utils");
 const config_1 = __importDefault(require("../../config"));
 // Function to register user
@@ -34,18 +32,8 @@ const registerUser = (payload) => __awaiter(void 0, void 0, void 0, function* ()
     };
 });
 const getAllUser = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const UserQuery = new QueryBuilder_1.default(user_model_1.default.find(), query)
-        .search(user_constant_1.UserSearchableFields)
-        .filter()
-        .sort()
-        .paginate()
-        .fields();
-    const result = yield UserQuery.modelQuery;
-    const meta = yield UserQuery.countTotal();
-    return {
-        result,
-        meta,
-    };
+    const result = yield user_model_1.default.find();
+    return result;
 });
 exports.UserServices = {
     registerUser,

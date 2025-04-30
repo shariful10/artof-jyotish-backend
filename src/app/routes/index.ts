@@ -20,7 +20,7 @@ const moduleRoutes = [
     route: ContactRoutes,
   },
   {
-    path: "/media",
+    path: "/medias",
     route: MediaRoutes,
   },
   {

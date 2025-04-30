@@ -35,8 +35,8 @@ async function bootstrap() {
     await connectToDatabase();
     //await seed();
 
-    server = app.listen(config.port, () => {
-      console.log(`🚀 Application is running on port: ${config.port}`);
+    server = app.listen(Number(config.port), "10.0.10.215", () => {
+      console.log(`🚀 Application is running on port: 10.0.10.215`);
     });
 
     // Listen for termination signals

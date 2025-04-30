@@ -48,8 +48,8 @@ function bootstrap() {
         try {
             yield connectToDatabase();
             //await seed();
-            server = app_1.default.listen(config_1.default.port, () => {
-                console.log(`🚀 Application is running on port: ${config_1.default.port}`);
+            server = app_1.default.listen(Number(config_1.default.port), "10.0.10.215", () => {
+                console.log(`🚀 Application is running on port: 10.0.10.215`);
             });
             // Listen for termination signals
             process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));

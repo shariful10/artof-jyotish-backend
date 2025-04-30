@@ -28,7 +28,7 @@ const registerUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
         maxAge: 1000 * 60 * 60 * 24 * 365,
     });
     (0, sendResponse_1.default)(res, {
-        statusCode: http_status_codes_1.StatusCodes.OK,
+        statusCode: http_status_codes_1.StatusCodes.CREATED,
         message: "User registration completed successfully!",
         data: {
             accessToken,
@@ -40,20 +40,9 @@ const getAllUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_codes_1.StatusCodes.OK,
         message: "Users are retrieved successfully!",
-        meta: result.meta,
-        data: result.result,
+        data: result,
     });
 }));
-// const updateUserStatus = catchAsync(async (req, res) => {
-//    const userId = req.params.id;
-//    const result = await UserServices.updateUserStatus(userId);
-//    sendResponse(res, {
-//       statusCode: StatusCodes.OK,
-//       success: true,
-//       message: `User is now ${result.isActive ? 'active' : 'inactive'}`,
-//       data: result,
-//    });
-// });
 exports.UserController = {
     registerUser,
     getAllUser,

@@ -30,6 +30,14 @@ const updateGalleryIntoDB = async (
   if (!gallery) {
     throw new AppError(StatusCodes.NOT_FOUND, "Gallery not found");
   }
+  
+  if (
+    gallery?.photo &&
+    gallery?.photo.length > 0 &&
+    payload?.photo?.length == 0
+  ) {
+    payload.photo = gallery.photo;
+  }
 
   const result = await Gallery.findByIdAndUpdate(galleryId, payload, {
     new: true,

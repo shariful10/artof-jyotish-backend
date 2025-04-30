@@ -17,6 +17,16 @@ const updateContactIntoDB = async (
   contactId: string,
   updatedData: Partial<TContact>
 ) => {
+  const contact = await Contact.isContactExists(contactId);
+
+  if (
+    contact?.photo &&
+    contact?.photo.length > 0 &&
+    updatedData?.photo?.length == 0
+  ) {
+    updatedData.photo = contact.photo;
+  }
+
   const result = await Contact.findByIdAndUpdate(contactId, updatedData, {
     new: true,
   });

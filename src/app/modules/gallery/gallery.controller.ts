@@ -39,8 +39,6 @@ const updateGallery = catchAsync(async (req, res) => {
     req.body.photo = (req.files as Express.Multer.File[]).map(
       (file) => `/uploads/${file.filename}`
     );
-  } else {
-    req.body.photo = [];
   }
 
   const result = await GalleryService.updateGalleryIntoDB(galleryId, req.body);
