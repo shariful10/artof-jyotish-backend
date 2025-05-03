@@ -19,4 +19,6 @@ exports.default = {
     jwt_pass_reset_secret: process.env.JWT_PASS_RESET_SECRET,
     jwt_pass_reset_expires_in: process.env.JWT_PASS_RESET_EXPIRES_IN,
     upload_path: process.env.UPLOAD_URL,
+    auth_user: process.env.AUTH_USER,
+    auth_pass: process.env.AUTH_PASS,
 };
