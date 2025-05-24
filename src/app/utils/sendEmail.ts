@@ -1,15 +1,15 @@
-import nodemailer from "nodemailer";
 import config from "../config";
+import nodemailer from "nodemailer";
 import { TMail } from "../modules/mail/mail.interface";
 
 export const sendEmail = async (to: string, payload: TMail) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: config.NODE_ENV === "production",
+    host: "smtp-relay.brevo.com",
+    port: 2525,
+    secure: false,
     auth: {
-      user: config.auth_user,
-      pass: config.auth_pass,
+      user: config.sendEmail.brevo_email,
+      pass: config.sendEmail.brevo_pass,
     },
   });
 
@@ -42,9 +42,15 @@ export const sendEmail = async (to: string, payload: TMail) => {
       ${field("Email", payload?.email)}
       ${field("Date of Birth", payload?.dateOfBirth)}
       ${field("Place of Birth", payload?.placeOfBirth)}
+      ${field("Time of Birth", payload?.timeOfBirth)}
+      ${field("Partner Name", payload?.partnerName)}
+      ${field("Partner Date of Birth", payload?.partnerDateOfBirth)}
+      ${field("Partner Time of Birth", payload?.partnerTimeOfBirth)}
+      ${field("Partner Place of Birth", payload?.partnerPlaceOfBirth)}
       ${field("Hope to Learn", payload?.hopeToLearn || payload?.whatToLearn)}
       ${field("Like to Focus", payload?.likeToFocus)}
       ${field("Date Ranges", payload?.dateRanges)}
+      ${field("Type of Activity", payload?.typeOfActivity)}
       ${field("Details", payload?.whatToLearnDetails)}
     </div>
 
@@ -68,8 +74,8 @@ export const sendEmail = async (to: string, payload: TMail) => {
   `;
 
   await transporter.sendMail({
-    from: config.auth_user,
-    to,
+    from: `Support Team <${config.sendEmail.email_from}>`,
+    to: config.sendEmail.email_from,
     subject: "User Contact Info",
     text: `User Contact Info\n\nName: ${payload.fullName || ""}\nEmail: ${
       payload.email || ""

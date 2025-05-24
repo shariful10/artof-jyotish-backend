@@ -10,7 +10,7 @@ const app: Application = express();
 // Middleware setup
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://204.197.173.249:4101"],
+    origin: ["http://localhost:4101", "http://204.197.173.249:4101"],
     credentials: true,
   })
 );

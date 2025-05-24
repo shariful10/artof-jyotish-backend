@@ -22,7 +22,7 @@ const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 // Middleware setup
 app.use((0, cors_1.default)({
-    origin: ["http://localhost:3000", "http://204.197.173.249:4101"],
+    origin: ["http://localhost:4101", "http://204.197.173.249:4101"],
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());
